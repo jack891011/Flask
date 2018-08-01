@@ -1,0 +1,28 @@
+﻿<head>
+<base target="_blank" />
+<style>
+p {color:blue}
+td {bgcolor:green}
+</style>
+</head>
+<table border="3">                         
+<tr>
+<th>按钮</th>
+<th>数值</th>
+</tr>
+<tr>
+<td bgcolor="blue"><button onclick="f1()">百度一下</button></td>                <!--   <table>:表格  <th>表头 <tr>:行 <td>:列   -->      
+<td bgcolor="red">row 1, cell 2</td>
+</tr>
+<tr>
+<td><a  href="http://www.douban.com" ><button>豆瓣一下</button></a></td>
+<td bgcolor="yellow">row 2, cell 2</td>
+</tr>
+</table>
+<script>
+function f1()
+{
+	location.assign("http://www.baidu.com")
+}
+</script>
+<p>test</p>
