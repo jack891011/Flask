@@ -39,7 +39,7 @@ class NameForm(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    return render_template('home.html',current_time=datetime.datetime.utcnow())
 
 
 @app.route('/login',methods=['GET'])

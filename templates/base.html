@@ -2,13 +2,13 @@
 {% block title %}Flasky{% endblock %}
 {% block head %}
 {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename = 'pic/orange.png') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename = 'pic/orange.png') }}" type="image/x-icon">
+<link rel="bookmark"  type="image/x-icon"  href="static/pic/duihui1.ico">
+<link rel="shortcut icon" href="static/pic/duihui1.ico">
 {% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
-<div class="container">
+<div class="container" >
 <div class="navbar-header">
 <button type="button" class="navbar-toggle"
 data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,4 +34,10 @@ data-toggle="collapse" data-target=".navbar-collapse">
 </div>
 <div class="page-header">
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{{ moment.lang('zh-cn') }}
 {% endblock %}
