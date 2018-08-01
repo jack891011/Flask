@@ -3,8 +3,7 @@
 {% block page_content %}
 <div class="page-header">
 <h1 style="color:blue;text-align:center">Welcome</h1>
-<p style="color:blue;text-align:center">北京时间: {{ moment(current_time).format(" dddd, YYYY MM DD, HH:mm:ss") }}.</p>
-<p style="color:blue;text-align:center">That was {{ moment(current_time).fromNow(refresh=True) }}</p>
-<p style="color:blue;text-align:center">{{ moment(current_time).calendar()}}</p>
+<p style="color:blue;text-align:center">北京时间: {{ moment(current_time).format(" dddd   YYYY-MM-DD  HH:mm:ss") }}</p>
+<p style="color:blue;text-align:center"> 第一次登录于{{ moment(current_time).fromNow(refresh=True) }}</p>
 </div> 
 {% endblock %}

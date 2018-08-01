@@ -1,15 +1,14 @@
  # -*- coding: utf-8 -*-
-from flask import Flask,render_template,redirect,abort,request,session,url_for,flash
-from  flask_bootstrap import Bootstrap
-from  flask_moment import Moment
-from flask_wtf import FlaskForm
-from  flask_pymongo import PyMongo
-from wtforms import *
-from wtforms.validators import *
+from    flask import Flask,render_template,redirect,abort,request,session,url_for,flash
+from    flask_bootstrap import Bootstrap
+from    flask_moment import Moment
+from    flask_wtf import FlaskForm
+from    flask_pymongo import PyMongo
+from    wtforms import *
+from    wtforms.validators import *
 from    flask_mail import Mail,Message
-import paramiko,base64,datetime,os,threading
-from threading import  Thread
-
+from    threading import  Thread
+import  paramiko,base64,datetime,os,threading
 
 app = Flask(__name__)
 ##############################  app 配送段 ################
@@ -31,7 +30,8 @@ mongo = PyMongo(app)
 
 
 class NameForm(FlaskForm):
-    name = StringField('输入你的账号',validators=[Email()])
+    name = StringField('账号:',validators=[Email()])
+    password = PasswordField('密码:',validators=[Email()])
     submit = SubmitField('提交')
 
 #form = NameForm()
@@ -44,7 +44,8 @@ def home():
 
 @app.route('/login',methods=['GET'])
 def login_page():
-    return render_template('login.html')
+    form = NameForm()
+    return render_template('login.html',form=form.password)
 
 
 
