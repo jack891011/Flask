@@ -1,2 +1,8 @@
-﻿<tittle>Welcome ,{{username}}</tittle>
-<h1 style="color:green;text-align:center"> hello test, {{username}}</h> 
+﻿{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block page_content %}
+<div class="page-header" style="text-align:center">
+<h1>Hello, {% if name %}{{ name }}{% else %}Flasker{% endif %}!</h1>
+<h1 style="text-align:center;color: green">登录成功</h1>
+</div>
+{% endblock %}

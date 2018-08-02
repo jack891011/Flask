@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block page_content %}
-<div class="page-header">
-<form method="POST">
-{{ form.hidden_tag() }}
-{{ form.name.label }} {{ form.name() }}
-{{ form.submit() }}
-</form>
-</div> 
+<div class="page-header" style="text-align:center">
+<h1>Hello, {% if name %}{{ name }}{% else %}Flasker{% endif %}!</h1>
+<h1 style="text-align:center">欢迎使用</h1>
+</div>
+<div style='margin:0 auto; width:220px; height:200px;text-align: center;'> 
+{{ wtf.quick_form(form) }}
+</div>
 {% endblock %}

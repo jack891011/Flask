@@ -1,10 +1,16 @@
 ﻿{% extends "bootstrap/base.html" %}
 {% block title %}Flasky{% endblock %}
-{% block head %}
-{{ super() }}
-<link rel="bookmark"  type="image/x-icon"  href="static/pic/duihui1.ico">
-<link rel="shortcut icon" href="static/pic/duihui1.ico">
-{% endblock %}
+
+
+
+<div class="container">
+{% for message in get_flashed_messages() %}
+<div class="alert alert-warning">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+{{ message }}
+</div>
+{% endfor %}
+
 
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">

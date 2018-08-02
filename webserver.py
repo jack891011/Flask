@@ -4,6 +4,7 @@ from    flask_bootstrap import Bootstrap
 from    flask_moment import Moment
 from    flask_wtf import FlaskForm
 from    flask_pymongo import PyMongo
+from    flask_babel import Babel,lazy_gettext,gettext
 from    wtforms import *
 from    wtforms.validators import *
 from    flask_mail import Mail,Message
@@ -21,20 +22,32 @@ app.config['MAIL_SERVER'] = 'smtp.163.com'
 app.config['MAIL_PORT'] = 25
 app.config['MAIL_USERNAME'] = '13851543835@163.com'
 app.config['MAIL_PASSWORD'] = 'beckham07'
-app.config['MONGO_URI'] = 'mongodb://192.168.1.49:40000/admin'
+app.config['MONGO_URI'] = 'mongodb://192.168.1.49:40000/flask'
 
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 mail = Mail(app)
 mongo = PyMongo(app)
+babel = Babel(app)
+
+@babel.localeselector
+def get_locale():
+     return 'zh'
+
+@babel.timezoneselector
+def get_timezone():
+     return 'UTC+8'
 
 
 class NameForm(FlaskForm):
-    name = StringField('账号:',validators=[Email()])
-    password = PasswordField('密码:',validators=[Email()])
-    submit = SubmitField('提交')
-
-#form = NameForm()
+    user = StringField('',validators=[Email()], render_kw = {'placeholder':'输入你的用户名'})
+    password = PasswordField('',validators=[DataRequired()],render_kw = {'placeholder':'输入你的密码'})
+    submit = SubmitField('Login in')
+    #email = StringField('Email Address', validators=[Email()])
+    #password2 = PasswordField('', [DataRequired(),EqualTo('password', message='Passwords must match')],
+                              #render_kw = {'placeholder':'再次输入你的密码'}) #Text Field类型，密码输入框，必填，必须同password字段一致,适用于密码二次确认
+    #age = IntegerField('Age', validators=[NumberRange(min=16, max=70)]) # Text Field类型，文本输入框，必须输入整型数值，范围在16到70之间
+    #birthday = DateField('Birthday', format='%Y-%m-%d')  # Text Field类型，文本输入框，必须输入是"年-月-日"格式的日期
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -42,42 +55,28 @@ def home():
     return render_template('home.html',current_time=datetime.datetime.utcnow())
 
 
-@app.route('/login',methods=['GET'])
+@app.route('/loginsuc',methods=['GET'])
+def login_suc():
+    return render_template('login_suc.html')
+
+@app.route('/login',methods=['GET','POST'])
 def login_page():
     form = NameForm()
-    return render_template('login.html',form=form.password)
-
-
-
-@app.route('/base', methods=['GET', 'POST'])
-def base():
-    return render_template('base1.html')
-
-@app.route('/base1', methods=['GET', 'POST'])
-def foir():
-    return redirect(url_for('home'))
-
-@app.route('/login',methods=['POST'])
-def login():
-    user=request.form['username']
-    passwd=request.form['password']
-
-
-    if db.find_one({'user':user})['pwd'] == passwd:
-            return render_template('login_suc.html')
-    else:
-              return render_template('login_bad.html')
-
-@app.route('/flask/<user>')
-def flask(user):
-    form = NameForm()
-    #user = { 'nickname': 'Miguel' } # fake user
-    #return render_template("hello.html",
-        #title = 'Home',
-        #user = user)
-    #return redirect('http://www.sina.com')
-
-    return render_template('user.html',form=form,name=user)
+    user = None
+    pwd = None
+    if  form.validate_on_submit():
+        session['user'] = form.user.data
+        session['pwd'] = form.password.data
+        form.user.data = ''
+        form.password.data = ''
+        if mongo.db.user.find_one({"name":session['user']}) is not None:
+            return redirect(url_for('login_suc'))
+        else:
+            flash('账号不存在,请注册')
+            #thr = Thread(target=send_email,args=(session['user'],))
+            #thr.start()
+            #return redirect(url_for('login_bad'))
+    return render_template('login.html',form=form)
 
 ############################# 测试 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_email(to):
@@ -85,21 +84,6 @@ def send_email(to):
     msg = Message(app.config['FLASKY_MAIL_SUBJECT_PREFIX'],sender=app.config['FLASKY_MAIL_SENDER'], recipients=[to])
     msg.body = '感谢注册'
     mail.send(msg)
-
-@app.route('/test', methods=['GET', 'POST'])
-def test():
-    form = NameForm()
-    if form.validate_on_submit():
-        session['name'] = form.name.data
-        if mongo.db.user.find_one({"name":session['name']}) is not None:
-            return redirect(url_for('home'))
-        else:
-            flash('账号不存在,请注册')
-            thr = Thread(target=send_email,args=(session['name'],))
-            thr.start()
-            return redirect(url_for('test'))
-    return render_template('test.html',form=form, name=session.get('name'))
-
 
 ############################# 发送邮件 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route('/mail')
@@ -119,21 +103,6 @@ def chpwd_page():
     return render_template('learn.html')
 
 
-@app.route('/chpwd',methods=['POST'])
-def chpwd():
-    host='192.168.1.52'
-    pwd= base64.decodebytes(b'YmVja2hhbTIz\n')
-    user=request.form['a']
-    #pwd=request.form['b']
-    npwd=request.form['c']
-    cmd="echo %s:%s | chpasswd " % (user,npwd)
-    ssh=paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())   #自动添加主机名和主机密钥到本地的hostkeys对象
-    ssh.connect(hostname=host,username='root',password=pwd)
-    stdin,stdout,stderr=ssh.exec_command(cmd)
-    print(stdout.read())
-    return render_template('login_suc.html')
-
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -142,5 +111,5 @@ def page_not_found(error):
 
 
 if __name__=='__main__':
-    app.run('192.168.1.8',8080,debug=True)
+    app.run('127.0.0.1',8080,debug=True)
 
