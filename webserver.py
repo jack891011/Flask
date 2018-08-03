@@ -4,6 +4,7 @@ from    flask_bootstrap import Bootstrap
 from    flask_moment import Moment
 from    flask_wtf import FlaskForm
 from    flask_pymongo import PyMongo
+from    flask_login import LoginManager,UserMixin,login_required,login_user
 from    flask_babel import Babel,lazy_gettext,gettext
 from    wtforms import *
 from    wtforms.validators import *
@@ -29,6 +30,17 @@ moment = Moment(app)
 mail = Mail(app)
 mongo = PyMongo(app)
 babel = Babel(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+# 设置当未登录用户请求一个只有登录用户才能访问的视图时，闪现的错误消息的内容，
+# 默认的错误消息是：Please log in to access this page.。
+login_manager.login_message = 'Unauthorized User'
+# 设置闪现的错误消息的类别
+login_manager.login_message_category = "info"
+
+
+
+
 
 @babel.localeselector
 def get_locale():
@@ -40,14 +52,19 @@ def get_timezone():
 
 
 class NameForm(FlaskForm):
-    user = StringField('',validators=[Email()], render_kw = {'placeholder':'输入你的用户名'})
-    password = PasswordField('',validators=[DataRequired()],render_kw = {'placeholder':'输入你的密码'})
+    user = StringField('Uasename',validators=[Email()], render_kw = {'placeholder':'输入你的用户名'})
+    password = PasswordField('Password',validators=[DataRequired()],render_kw = {'placeholder':'输入你的密码'})
     submit = SubmitField('Login in')
     #email = StringField('Email Address', validators=[Email()])
     #password2 = PasswordField('', [DataRequired(),EqualTo('password', message='Passwords must match')],
                               #render_kw = {'placeholder':'再次输入你的密码'}) #Text Field类型，密码输入框，必填，必须同password字段一致,适用于密码二次确认
     #age = IntegerField('Age', validators=[NumberRange(min=16, max=70)]) # Text Field类型，文本输入框，必须输入整型数值，范围在16到70之间
     #birthday = DateField('Birthday', format='%Y-%m-%d')  # Text Field类型，文本输入框，必须输入是"年-月-日"格式的日期
+    #choice = SelectMultipleField('Hobby', choices=[('swim', 'Swimming'),('skate', 'Skating'),('hike', 'Hiking')]) #Select类型，多选框，choices里的内容会在Option里，里面每个项是(值，显示名)对
+    #job = SelectField('', render_kw = {'placeholder':'输入你的职业'},choices=[('teacher', 'Teacher'),('doctor', 'Doctor'),('engineer', 'Engineer'),('lawyer', 'Lawyer')]) #下拉选框
+
+class User(UserMixin):
+    pass
 
 
 @app.route('/', methods=['GET', 'POST'])
