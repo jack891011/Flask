@@ -49,3 +49,8 @@
 2018-08-08 17:58:31,640 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:31] "GET /upload HTTP/1.1" 200 -
 2018-08-08 17:58:41,769 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:41] "POST /upload HTTP/1.1" 200 -
 2018-08-08 17:59:05,846 - INFO - 192.168.1.8 - - [08/Aug/2018 17:59:05] "GET /upload HTTP/1.1" 200 -
+2018-08-08 18:01:46,684 - INFO -  * Detected change in 'D:\\Flask\\webserver.py', reloading
+2018-08-08 18:01:46,838 - INFO -  * Restarting with stat
+2018-08-08 18:01:47,718 - WARNING -  * Debugger is active!
+2018-08-08 18:01:47,720 - INFO -  * Debugger PIN: 732-583-165
+2018-08-08 18:01:48,570 - INFO -  * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)

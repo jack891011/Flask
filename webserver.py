@@ -14,7 +14,7 @@ import  paramiko,base64,datetime,os,threading,logging
 
 log = logging.getLogger()
 log.setLevel(level = logging.DEBUG)
-logfile = logging.FileHandler('log/log.txt')
+logfile = logging.FileHandler('log/log.txt',encoding='utf-8')
 logfile.setLevel(logging.INFO)
 screen = logging.StreamHandler()
 screen.setLevel(logging.DEBUG)
