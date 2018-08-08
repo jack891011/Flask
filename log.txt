@@ -1,0 +1,32 @@
+2018-08-08 17:21:39,856 - INFO -  * Restarting with stat
+2018-08-08 17:21:40,619 - WARNING -  * Debugger is active!
+2018-08-08 17:21:40,620 - INFO -  * Debugger PIN: 732-583-165
+2018-08-08 17:21:41,711 - INFO -  * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+2018-08-08 17:21:43,688 - INFO - 123@qq.com µÇÂ¼³É¹¦
+2018-08-08 17:21:43,690 - INFO - 192.168.1.8 - - [08/Aug/2018 17:21:43] "POST /login HTTP/1.1" 302 -
+2018-08-08 17:21:43,751 - INFO - 192.168.1.8 - - [08/Aug/2018 17:21:43] "GET /loginsuc HTTP/1.1" 200 -
+2018-08-08 17:21:59,448 - INFO - 192.168.1.8 - - [08/Aug/2018 17:21:59] "GET / HTTP/1.1" 200 -
+2018-08-08 17:22:00,820 - INFO - 192.168.1.8 - - [08/Aug/2018 17:22:00] "GET /login HTTP/1.1" 200 -
+2018-08-08 17:22:06,908 - INFO - 1235@qq.com µÇÂ¼Ê§°Ü
+2018-08-08 17:22:06,910 - INFO - 192.168.1.8 - - [08/Aug/2018 17:22:06] "POST /login HTTP/1.1" 200 -
+2018-08-08 17:22:08,198 - INFO - 192.168.1.8 - - [08/Aug/2018 17:22:08] "GET / HTTP/1.1" 200 -
+2018-08-08 17:22:08,832 - INFO - 192.168.1.8 - - [08/Aug/2018 17:22:08] "GET / HTTP/1.1" 200 -
+2018-08-08 17:22:46,251 - INFO -  * Detected change in 'D:\\Flask\\webserver.py', reloading
+2018-08-08 17:22:46,770 - INFO -  * Restarting with stat
+2018-08-08 17:22:47,881 - INFO -  * Restarting with stat
+2018-08-08 17:22:48,660 - WARNING -  * Debugger is active!
+2018-08-08 17:22:48,663 - INFO -  * Debugger PIN: 732-583-165
+2018-08-08 17:22:49,503 - INFO -  * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+2018-08-08 17:23:05,789 - INFO - 192.168.1.8 - - [08/Aug/2018 17:23:05] "GET /login HTTP/1.1" 200 -
+2018-08-08 17:23:09,389 - INFO - 1235@qq.com µÇÂ¼Ê§°Ü
+2018-08-08 17:23:09,391 - INFO - 192.168.1.8 - - [08/Aug/2018 17:23:09] "POST /login HTTP/1.1" 200 -
+2018-08-08 17:26:00,314 - INFO -  * Restarting with stat
+2018-08-08 17:26:01,111 - WARNING -  * Debugger is active!
+2018-08-08 17:26:01,112 - INFO -  * Debugger PIN: 732-583-165
+2018-08-08 17:26:05,298 - INFO -  * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+2018-08-08 17:26:08,962 - INFO - 192.168.1.8 - - [08/Aug/2018 17:26:08] "GET / HTTP/1.1" 200 -
+2018-08-08 17:26:38,644 - INFO -  * Detected change in 'D:\\Flask\\webserver.py', reloading
+2018-08-08 17:26:38,886 - INFO -  * Restarting with stat
+2018-08-08 17:26:39,673 - WARNING -  * Debugger is active!
+2018-08-08 17:26:39,674 - INFO -  * Debugger PIN: 732-583-165
+2018-08-08 17:26:40,513 - INFO -  * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)

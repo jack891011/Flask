@@ -10,7 +10,20 @@ from    wtforms import *
 from    wtforms.validators import *
 from    flask_mail import Mail,Message
 from    threading import  Thread
-import  paramiko,base64,datetime,os,threading
+import  paramiko,base64,datetime,os,threading,logging
+
+log = logging.getLogger()
+log.setLevel(level = logging.DEBUG)
+logfile = logging.FileHandler('log.txt')
+logfile.setLevel(logging.INFO)
+screen = logging.StreamHandler()
+screen.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+logfile.setFormatter(formatter)
+log.addHandler(logfile)
+log.addHandler(screen)
+
+
 
 app = Flask(__name__)
 ##############################  app 配送段 ################
@@ -37,9 +50,6 @@ login_manager.login_view = 'login'
 login_manager.login_message = 'Unauthorized User'
 # 设置闪现的错误消息的类别
 login_manager.login_message_category = "info"
-
-
-
 
 
 @babel.localeselector
@@ -87,8 +97,11 @@ def login_page():
         form.user.data = ''
         form.password.data = ''
         if mongo.db.user.find_one({"name":session['user']}) is not None:
+            flash('Login successfully!')
+            log.info('%s 登录成功' % session['user'])
             return redirect(url_for('login_suc'))
         else:
+            log.info('%s 登录失败' % session['user'])
             flash('账号不存在,请注册')
             #thr = Thread(target=send_email,args=(session['user'],))
             #thr.start()
@@ -128,5 +141,5 @@ def page_not_found(error):
 
 
 if __name__=='__main__':
-    app.run('127.0.0.1',8080,debug=True)
+    app.run('0.0.0.0',8080,debug=True)
 
