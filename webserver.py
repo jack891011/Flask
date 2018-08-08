@@ -14,7 +14,7 @@ import  paramiko,base64,datetime,os,threading,logging
 
 log = logging.getLogger()
 log.setLevel(level = logging.DEBUG)
-logfile = logging.FileHandler('log.txt')
+logfile = logging.FileHandler('log/log.txt')
 logfile.setLevel(logging.INFO)
 screen = logging.StreamHandler()
 screen.setLevel(logging.DEBUG)
@@ -125,6 +125,16 @@ def send_mail():
     mail.send(msg)
     return 'Successful'
 
+
+######测试上传
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['file']
+        f.save('E:/tmp/%s' % f.filename)
+        flash('You were successfully logged in')
+        return '上传成功'
+    return render_template('upload.html')
 
 
 

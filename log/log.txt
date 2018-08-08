@@ -30,3 +30,22 @@
 2018-08-08 17:26:39,673 - WARNING -  * Debugger is active!
 2018-08-08 17:26:39,674 - INFO -  * Debugger PIN: 732-583-165
 2018-08-08 17:26:40,513 - INFO -  * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+2018-08-08 17:53:26,611 - INFO -  * Detected change in 'D:\\Flask\\webserver.py', reloading
+2018-08-08 17:53:27,110 - INFO -  * Restarting with stat
+2018-08-08 17:53:28,116 - WARNING -  * Debugger is active!
+2018-08-08 17:53:28,119 - INFO -  * Debugger PIN: 732-583-165
+2018-08-08 17:53:28,967 - INFO -  * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+2018-08-08 17:55:41,443 - INFO -  * Detected change in 'D:\\Flask\\webserver.py', reloading
+2018-08-08 17:55:41,863 - INFO -  * Restarting with stat
+2018-08-08 17:57:47,357 - INFO -  * Restarting with stat
+2018-08-08 17:57:48,117 - WARNING -  * Debugger is active!
+2018-08-08 17:57:48,119 - INFO -  * Debugger PIN: 732-583-165
+2018-08-08 17:57:49,008 - INFO -  * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
+2018-08-08 17:58:22,112 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:22] "GET / HTTP/1.1" 200 -
+2018-08-08 17:58:22,286 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:22] "GET /static/pic/duihui1.ico HTTP/1.1" 200 -
+2018-08-08 17:58:26,600 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:26] "GET / HTTP/1.1" 200 -
+2018-08-08 17:58:26,910 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:26] "GET /favicon.ico HTTP/1.1" 200 -
+2018-08-08 17:58:26,913 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:26] "GET /favicon.ico HTTP/1.1" 200 -
+2018-08-08 17:58:31,640 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:31] "GET /upload HTTP/1.1" 200 -
+2018-08-08 17:58:41,769 - INFO - 192.168.1.8 - - [08/Aug/2018 17:58:41] "POST /upload HTTP/1.1" 200 -
+2018-08-08 17:59:05,846 - INFO - 192.168.1.8 - - [08/Aug/2018 17:59:05] "GET /upload HTTP/1.1" 200 -
