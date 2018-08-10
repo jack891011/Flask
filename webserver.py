@@ -4,7 +4,7 @@ from    flask_bootstrap import Bootstrap
 from    flask_moment import Moment
 from    flask_wtf import FlaskForm
 from    flask_pymongo import PyMongo
-from    flask_login import LoginManager,UserMixin,login_required,login_user
+from    flask_login import LoginManager,UserMixin,login_required,login_user,logout_user
 from    flask_babel import Babel,lazy_gettext,gettext
 from    wtforms import *
 from    wtforms.validators import *
@@ -44,10 +44,11 @@ mail = Mail(app)
 mongo = PyMongo(app)
 babel = Babel(app)
 login_manager = LoginManager(app)
+login_manager.session_protection = 'strong'
 login_manager.login_view = 'login'
 # 设置当未登录用户请求一个只有登录用户才能访问的视图时，闪现的错误消息的内容，
 # 默认的错误消息是：Please log in to access this page.。
-login_manager.login_message = 'Unauthorized User'
+login_manager.login_message = '请先登录'
 # 设置闪现的错误消息的类别
 login_manager.login_message_category = "info"
 
@@ -59,7 +60,6 @@ def get_locale():
 @babel.timezoneselector
 def get_timezone():
      return 'UTC+8'
-
 
 class NameForm(FlaskForm):
     user = StringField('Uasename',validators=[Email()], render_kw = {'placeholder':'输入你的用户名'})
@@ -77,17 +77,28 @@ class User(UserMixin):
     pass
 
 
-@app.route('/', methods=['GET', 'POST'])
+@login_manager.user_loader
+def load_user(username):
+    if mongo.db.user.find_one({"name": username}) is not None:
+        curr_user = User()
+        curr_user.id = username
+        return curr_user
+
+
+
+@app.route('/home', methods=['GET', 'POST'])
+@login_required
 def home():
     return render_template('home.html',current_time=datetime.datetime.utcnow())
 
 
 @app.route('/loginsuc',methods=['GET'])
+@login_required
 def login_suc():
     return render_template('login_suc.html')
 
-@app.route('/login',methods=['GET','POST'])
-def login_page():
+@app.route('/',methods=['GET','POST'])
+def login():
     form = NameForm()
     user = None
     pwd = None
@@ -96,17 +107,27 @@ def login_page():
         session['pwd'] = form.password.data
         form.user.data = ''
         form.password.data = ''
-        if mongo.db.user.find_one({"name":session['user']}) is not None:
+        userinfo = mongo.db.user.find_one({"name":session['user']})
+        if userinfo is  not None and userinfo['pwd'] == session['pwd']:
             flash('Login successfully!')
             log.info('%s 登录成功' % session['user'])
+            curr_user = User()
+            curr_user.id = session['user']
+            login_user(curr_user,remember=True)
+            next = request.args.get('next')
+            log.info(next)
             return redirect(url_for('login_suc'))
         else:
             log.info('%s 登录失败' % session['user'])
-            flash('账号不存在,请注册')
-            #thr = Thread(target=send_email,args=(session['user'],))
-            #thr.start()
-            #return redirect(url_for('login_bad'))
+            flash('账号不存在或密码错误')
+
     return render_template('login.html',form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 ############################# 测试 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_email(to):
@@ -128,6 +149,7 @@ def send_mail():
 
 ######测试上传
 @app.route('/upload', methods=['GET', 'POST'])
+@login_required
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']

@@ -1,7 +1,41 @@
-﻿{% extends "base.html" %}
-{% block title %}请求页面不存在{% endblock %}
+﻿
+
+{% extends "bootstrap/base.html" %}
+
+{% block title %}请求的页面不存在{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="bookmark"  type="image/x-icon"  href="static/pic/duihui1.ico">
+<link rel="shortcut icon" href="static/pic/duihui1.ico">
+{% endblock %}
+
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+<div class="container" >
+<div class="navbar-header">
+<button type="button" class="navbar-toggle"
+data-toggle="collapse" data-target=".navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="/">登录</a>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+</ul>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block content %}
 {% block page_content %}
 <div class="page-header">
-<h1>小螺号,啊滴滴的吹，海鸥听了XJB飞~~</h1>
+<h1 style="text-align: center;color: red">小螺号,啊滴滴的吹，海鸥听了XJB飞~~</h1>
+<h2 style="text-align: center;color: red">服务器迷路啦...</h2>>
 </div>
+{% endblock %}
 {% endblock %}

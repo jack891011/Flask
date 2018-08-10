@@ -1,4 +1,16 @@
 ﻿{% extends "base.html" %}
+
+<div class="container">
+{% for message in get_flashed_messages() %}
+<div class="alert alert-warning" style='margin:0 auto; width:220px; height:50px;text-align: center;'>
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+{{ message }}
+</div>
+{% endfor %}
+</div>
+
+
+
 {% block page_content %}
 <div class="page-header">
 <h1 style="color:green;text-align:center">Login</h1>
@@ -10,4 +22,6 @@
 </form>
 </body>
 </div> 
+
+
 {% endblock %}

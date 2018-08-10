@@ -1,7 +1,10 @@
-﻿<tittle>上传测试</tittle>
-<bold>
+﻿{% extends "base.html" %}
+<tittle>上传文件</tittle>
+{% block page_content %}
+<div style='margin:0 auto; width:220px; height:200px;text-align: center;'> 
 <form action="/upload" enctype="multipart/form-data" method="post">
 <input type="file" name="file" />
 <input type="submit" value="上传文件" />
 </form>
-</body>
+</div>
+{% endblock %}
