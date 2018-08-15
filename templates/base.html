@@ -8,27 +8,68 @@
 
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-<div class="container" >
-<div class="navbar-header">
-<button type="button" class="navbar-toggle"
-data-toggle="collapse" data-target=".navbar-collapse">
-<span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<a class="navbar-brand" href="/home">Flasky</a>
+
+<nav class="navbar navbar-expand-sm navbar-right bg-dark navbar-dark">
+ <a class="navbar-brand" href="/home"> 
+ 	<img src="http://192.168.1.49/AC.png" alt="logo" class="rounded-circle" width="35" height="40">
+ </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#maincd">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+<div class="collapse navbar-collapse justify-content-start" id="maincd">
+  <ul class="navbar-nav">
+    <li class="nav-item"> <a class="nav-link text-warning" href="/home"> <h5>Home</h5> </a> </li>
+    <li class="nav-item"> <a class="nav-link text-warning" href="#">  <h5>Hosts</h5> </a> </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle text-warning" href="#" id="navbardrop" data-toggle="dropdown">其他选项</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/upload">上传文件</a>
+        <a class="dropdown-item" href="#">下载文件</a>
+        <a class="dropdown-item" href="https://www.baidu.com">百度</a>
+      </div>
+    </li>
+  </ul>
 </div>
-<div class="navbar-collapse collapse">
-<ul class="nav navbar-nav">
-<li><a href="/home">Home</a></li>
-<li><a href="/upload">上传文件</a></li>
-<li><a href="/logout">登出</a></li>
-</ul>
+<div class="justify-content-center">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">登出</button>
 </div>
+<div class="justify-content-end">
+    <form class="form-inline navbar-right">
+    	<input class="form-control" type="text" placeholder="Search">
+    	<button class="btn btn-success" type="button">Search</button>
+	</form>
 </div>
-</div>
+</nav>
+<br>
+
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+   
+        <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">是否登出</h4>
+        </div>
+ 
+        <!-- 模态框主体 -->
+        <div class="modal-body justify-content-center">
+          <a href="/logout"><button type="button" class="btn btn-success">确定</button></a>
+          <a href="/home"><button type="button" class="btn btn-info" href="/home">取消</button></a>
+        </div>
+   
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+   
+      </div>
+    </div>
+  </div>
+
+
 {% endblock %}
 {% block content %}
 <div class="container">

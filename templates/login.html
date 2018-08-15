@@ -1,34 +1,20 @@
 
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-
 {% block title %}Flask{% endblock %}
-{% block head %}
-{{ super() }}
-<link rel="bookmark"  type="image/x-icon"  href="static/pic/duihui1.ico">
-<link rel="shortcut icon" href="static/pic/duihui1.ico">
-{% endblock %}
 
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-<div class="container" >
-<div class="navbar-header">
-<button type="button" class="navbar-toggle"
-data-toggle="collapse" data-target=".navbar-collapse">
-<span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<a class="navbar-brand" href="/">登录</a>
-</div>
-<div class="navbar-collapse collapse">
-<ul class="nav navbar-nav">
-</ul>
-</div>
-</div>
-</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/home">Home</a>
+    </li>
+  </ul>
+</nav>
+<br>
+
 {% endblock %}
 {% block content %}
 
